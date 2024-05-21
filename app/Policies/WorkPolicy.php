@@ -13,8 +13,7 @@ class WorkPolicy
      */
     public function viewAny(User $user): bool
     {
-//        return $user->hasAnyPermission(['work-view']);
-        return true;
+        return $user->hasAnyPermission(['work-view']);
     }
 
     /**
@@ -30,7 +29,7 @@ class WorkPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**

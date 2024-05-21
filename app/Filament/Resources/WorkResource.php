@@ -40,7 +40,7 @@ class WorkResource extends Resource
             return true;
         }
 
-        return true;
+        return false;
     }
 
     public static function form(Form $form): Form
@@ -82,6 +82,13 @@ class WorkResource extends Resource
 
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        $user = auth()->user();
+        return parent::getEloquentQuery()->where('user_id', $user->id)
+            ->orderBy('created_at', 'DESC');
+    }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -93,14 +100,15 @@ class WorkResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Дата'),
             ])
-            ->filters([
-                //
-            ])
             ->headerActions([
+
                 Tables\Actions\CreateAction::make()
                 ->after(function (Component $livewire) {
                     $livewire->dispatch('refreshProducts');
                 })
+            ])
+            ->filters([
+                //
             ])
             ->actions([
             ])

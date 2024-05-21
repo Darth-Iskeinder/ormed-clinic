@@ -107,7 +107,7 @@ class ListOfBenefitsResource extends Resource
         return [
             'index' => Pages\ListListOfBenefits::route('/'),
             'create' => Pages\CreateListOfBenefits::route('/create'),
-            'edit' => Pages\EditListOfBenefits::route('/{record}/edit'),
+//            'edit' => Pages\EditListOfBenefits::route('/{record}/edit'),
         ];
     }
 }

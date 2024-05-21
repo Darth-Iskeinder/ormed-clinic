@@ -71,8 +71,7 @@ class HistoryResource extends Resource
                                 Select::make('service')->required()
                                     ->label('Выберите услугу')
                                     ->options($options)
-                                    ->searchable()
-                                    ->disabled(true),
+                                    ->searchable(),
                                 Forms\Components\TextInput::make('count')
                                     ->label('Количество')
                                     ->integer()
