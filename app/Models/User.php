@@ -48,9 +48,18 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function role()
+    public static function boot()
     {
-        return $this->belongsTo(Role::class);
-    }
+        parent::boot();
 
+        static::created(function($model) {
+            $role = Role::findById($model->role_id);
+            $model->assignRole($role->name);
+        });
+
+        static::updated(function($model) {
+            $role = Role::findById($model->role_id);
+            $model->assignRole($role->name);
+        });
+    }
 }
