@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('history_id')->constrained();
+            $table->integer('customer_id');
+            $table->string('notes');
             $table->integer('total_amount');
             $table->integer('total_staff_amount');
             $table->integer('total_company_amount');

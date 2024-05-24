@@ -13,6 +13,8 @@ class Work extends Model
         'services',
         'user_id',
         'history_id',
+        'customer_id',
+        'notes',
         'total_amount',
         'total_staff_amount',
         'total_company_amount'
@@ -38,6 +40,7 @@ class Work extends Model
 
         static::saving(function ($model) {
             $user = auth()->user();
+            $history = History::find($model->history_id);
             $totalRevenue = 0;
             $totalStaffRevenue = 0;
             foreach ($model->services as $service) {
@@ -51,6 +54,7 @@ class Work extends Model
             $model->total_staff_amount = $totalStaffRevenue;
             $model->total_company_amount = $totalRevenue - $totalStaffRevenue;
             $model->user_id = $user->id;
+            $model->customer_id = $history->customer_id;
         });
 
         static::created(function () {

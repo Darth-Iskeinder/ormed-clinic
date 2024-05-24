@@ -59,7 +59,7 @@ class ScheduleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('staff.name')
+                Tables\Columns\TextColumn::make('user.name')
                     ->label('Сотрудник')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('customer.name')

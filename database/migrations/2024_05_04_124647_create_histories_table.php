@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('customer_id');
             $table->integer('staff_id');
+            $table->string('referrer');
+            $table->integer('referrer_reward');
+            $table->string('diagnosis');
             $table->json('services');
             $table->json('reject_services');
             $table->integer('total_amount');

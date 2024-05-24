@@ -30,9 +30,9 @@ class Event extends Model
         parent::boot();
 
         static::saving(function ($model) {
-            if (!$model->staff_id) {
+            if (!$model->user_id) {
                 $user = auth()->user();
-                $model->staff_id = $user->id;
+                $model->user_id = $user->id;
             }
         });
     }

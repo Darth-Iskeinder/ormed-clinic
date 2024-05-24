@@ -58,6 +58,8 @@ class WorkResource extends Resource
             ->schema([
                 Forms\Components\Card::make()
                     ->schema([
+                        Forms\Components\TextInput::make('notes')
+                            ->label('Примечание'),
                         Repeater::make('services')
                             ->schema([
                                 Select::make('service')->required()
@@ -97,6 +99,8 @@ class WorkResource extends Resource
                     ->label('Пользователь'),
                 ArrayColumn::make('services')
                     ->label('Услуги'),
+                Tables\Columns\TextColumn::make('notes')
+                    ->label('Примечание'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Дата'),
             ])

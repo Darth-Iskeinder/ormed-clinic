@@ -15,8 +15,8 @@ class Customer extends Model
         'age'
     ];
 
-    public function histories()
+    public function works()
     {
-        return $this->hasMany(History::class);
+        return $this->hasMany(Work::class);
     }
 }

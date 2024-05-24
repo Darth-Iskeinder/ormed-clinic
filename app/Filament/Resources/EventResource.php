@@ -63,8 +63,6 @@ class EventResource extends Resource
 
     public static function table(Table $table): Table
     {
-        $user = auth()->user();
-//        dd($user);
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('customer.name')

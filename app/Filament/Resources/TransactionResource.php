@@ -50,6 +50,16 @@ class TransactionResource extends Resource
                     ->required()
                     ->integer()
                     ->maxLength(255),
+                Forms\Components\Select::make('payment_type')
+                    ->label('Выберите тип оплаты')
+                    ->options([
+                        'Мбанк' => 'Мбанк', // Используем ключ-значение для опций
+                        'Наличные' => 'Наличные',
+                        'Терминал' => 'Терминал'
+                    ])
+                    ->required(),
+                Forms\Components\TextInput::make('notes')
+                    ->label('Примечание'),
                 Toggle::make('accept')
                     ->label('Оплата')
                     ->default(true)
@@ -66,6 +76,10 @@ class TransactionResource extends Resource
                     ->label('Пользователь'),
                 Tables\Columns\TextColumn::make('sum')
                     ->label('Сумма'),
+                Tables\Columns\TextColumn::make('payment_type')
+                    ->label('Тип платежа'),
+                Tables\Columns\TextColumn::make('notes')
+                    ->label('Примечание'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Дата'),
                 Tables\Columns\IconColumn::make('accept')

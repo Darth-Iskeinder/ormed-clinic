@@ -71,7 +71,7 @@ class CustomerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\HistoriesRelationManager::class
+            RelationManagers\WorksRelationManager::class
         ];
     }
 

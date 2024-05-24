@@ -61,6 +61,20 @@ class HistoryResource extends Resource
             ->schema([
                 Forms\Components\Card::make()
                     ->schema([
+                        Forms\Components\Fieldset::make('Реферальная программа')
+                            ->schema([
+                                Forms\Components\TextInput::make('referrer')
+                                    ->label('Пожалуйста, укажите имя человека, который порекомендовал клиента, если клиент пришел по рекомендации.')
+                                    ->columnSpan(1),
+                                Forms\Components\TextInput::make('referrer_reward')
+                                    ->label('Пожалуйста, укажите сумму вознаграждения для человека, который порекомендовал клиента')
+                                    ->integer()
+                                    ->columnSpan(1),
+                            ])
+                            ->columns(2),
+
+                        Forms\Components\TextInput::make('diagnosis')
+                            ->label('Опишите диагноз пациента'),
                         Forms\Components\Select::make('customer_id')
                             ->label('Выберите клиента')
                             ->options(Customer::all()->pluck('name', 'id'))
@@ -109,12 +123,8 @@ class HistoryResource extends Resource
                     ->sortable(),
                 ArrayColumn::make('services')
                     ->label('Услуги'),
-                IconColumn::make('paid')
-                    ->label('Оплачено')
-                    ->boolean(),
-                IconColumn::make('completed')
-                    ->label('Выполнено')
-                    ->boolean(),
+                TextColumn::make('diagnosis')
+                    ->label('Диагноз пациента'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Дата создания')
                     ->sortable()
