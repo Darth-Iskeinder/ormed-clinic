@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::table('works', function (Blueprint $table) {
             $table->integer('customer_id')->nullable();
-            $table->string('notes');
+            $table->string('notes')->nullable();
         });
 
         Schema::table('transactions', function (Blueprint $table) {
-            $table->string('payment_type');
-            $table->string('notes');
+            $table->string('payment_type')->nullable();
+            $table->string('notes')->nullable();
         });
 
         Schema::table('histories', function (Blueprint $table) {
-            $table->string('referrer');
-            $table->integer('referrer_reward');
-            $table->string('diagnosis');
+            $table->string('referrer')->nullable();
+            $table->integer('referrer_reward')->nullable();
+            $table->string('diagnosis')->nullable();
         });
     }
 
