@@ -47,7 +47,7 @@ class Work extends Model
                 $item = json_decode($service['service'], true);
                 $totalRevenue += $item['price'] * (int) $service['count'];
                 $payoutPercentage = isset($item['payout_percentage']) ? (int) $item['payout_percentage'] : 0;
-                $totalStaffRevenue = round(($item['price'] * (int) $service['count'] * $payoutPercentage) / 100);
+                $totalStaffRevenue += round(($item['price'] * (int) $service['count'] * $payoutPercentage) / 100);
             }
 
             $model->total_amount = $totalRevenue;
