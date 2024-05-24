@@ -16,8 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('history_id')->constrained();
             $table->integer('sum');
-            $table->string('payment_type');
-            $table->string('notes');
             $table->boolean('accept')->default(true);
             $table->timestamps();
         });
