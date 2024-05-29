@@ -29,7 +29,7 @@ class HistoryPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasAnyPermission(['history-create']);
+        return true;
     }
 
     /**
