@@ -40,6 +40,11 @@ class Work extends Model
 
         static::saving(function ($model) {
             $user = auth()->user();
+
+            if (empty($model->user_id)) {
+                $model->user_id = $user->id;
+            }
+
             $history = History::find($model->history_id);
             $totalRevenue = 0;
             $totalStaffRevenue = 0;
@@ -53,7 +58,6 @@ class Work extends Model
             $model->total_amount = $totalRevenue;
             $model->total_staff_amount = $totalStaffRevenue;
             $model->total_company_amount = $totalRevenue - $totalStaffRevenue;
-            $model->user_id = $user->id;
             $model->customer_id = $history->customer_id;
         });
 

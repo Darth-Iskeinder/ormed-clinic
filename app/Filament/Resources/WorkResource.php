@@ -7,6 +7,7 @@ use App\Filament\Resources\WorkResource\RelationManagers;
 use App\Models\Customer;
 use App\Models\History;
 use App\Models\Service;
+use App\Models\User;
 use App\Models\Work;
 use App\Tables\Columns\ArrayColumn;
 use Filament\Actions\CreateAction;
@@ -60,6 +61,10 @@ class WorkResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('notes')
                             ->label('Примечание'),
+                        Forms\Components\Select::make('user_id')
+                            ->label('Выберите сотрудника')
+                            ->options(User::all()->pluck('name', 'id'))
+                            ->searchable(),
                         Repeater::make('services')
                             ->schema([
                                 Select::make('service')->required()
