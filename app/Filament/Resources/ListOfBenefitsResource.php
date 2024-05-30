@@ -14,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -45,11 +46,14 @@ class ListOfBenefitsResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Сотрудник'),
                 Tables\Columns\TextColumn::make('total_amount')
-                    ->label('Общая выручка'),
+                    ->label('Общая выручка')
+                    ->summarize(Sum::make()),
                 Tables\Columns\TextColumn::make('total_staff_amount')
-                    ->label('Выручка сотрудника'),
+                    ->label('Выручка сотрудника')
+                    ->summarize(Sum::make()),
                 Tables\Columns\TextColumn::make('total_company_amount')
-                    ->label('Выручка компании'),
+                    ->label('Выручка компании')
+                    ->summarize(Sum::make()),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Дата'),
             ])
