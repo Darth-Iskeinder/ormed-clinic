@@ -63,7 +63,7 @@ class WorkResource extends Resource
                             ->label('Примечание'),
                         Forms\Components\Select::make('user_id')
                             ->label('Выберите сотрудника')
-                            ->options(User::all()->pluck('name', 'id'))
+                            ->options(User::where('active', true)->pluck('name', 'id'))
                             ->searchable(),
                         Repeater::make('services')
                             ->schema([

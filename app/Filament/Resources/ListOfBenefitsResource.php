@@ -51,12 +51,16 @@ class ListOfBenefitsResource extends Resource
                     ->label('Выручка сотрудника'),
                 Tables\Columns\TextColumn::make('total_company_amount')
                     ->label('Выручка компании'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Дата'),
             ])
             ->filters([
                 Filter::make('created_at')
                 ->form([
-                    Forms\Components\DatePicker::make('created_at'),
+                    Forms\Components\DatePicker::make('created_at')
+                        ->timezone('Asia/Bishkek'),
                     Forms\Components\DatePicker::make('created_until')
+                        ->timezone('Asia/Bishkek')
                     ->default(now())
                 ])
                     ->query(function (Builder $query, array $data): Builder {

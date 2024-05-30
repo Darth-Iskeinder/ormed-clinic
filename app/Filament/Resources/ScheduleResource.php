@@ -43,7 +43,7 @@ class ScheduleResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('user_id')
                             ->label('Выберите сотрудника')
-                            ->options(User::all()->pluck('name', 'id'))
+                            ->options(User::where('active', true)->pluck('name', 'id'))
                             ->searchable(),
                         Forms\Components\Select::make('customer_id')
                             ->label('Выберите клиента')

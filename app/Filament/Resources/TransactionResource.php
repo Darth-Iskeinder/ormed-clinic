@@ -29,7 +29,7 @@ class TransactionResource extends Resource
     {
         $user = auth()->user();
 
-        if ($user->can('transaction-show')) {
+        if ($user->can('transaction-view')) {
             return true;
         }
 

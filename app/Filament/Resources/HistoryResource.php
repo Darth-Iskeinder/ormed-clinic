@@ -38,17 +38,6 @@ class HistoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function canViewAny(): bool
-    {
-        $user = auth()->user();
-
-        if ($user->can('history-view')) {
-            return true;
-        }
-
-        return false;
-    }
-
     public static function form(Form $form): Form
     {
         $services = Service::all();
