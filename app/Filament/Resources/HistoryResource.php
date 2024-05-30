@@ -55,8 +55,8 @@ class HistoryResource extends Resource
                                 Forms\Components\TextInput::make('referrer')
                                     ->label('Пожалуйста, укажите имя человека, который порекомендовал клиента, если клиент пришел по рекомендации.')
                                     ->columnSpan(1),
-                                Forms\Components\TextInput::make('referrer_reward')
-                                    ->label('Пожалуйста, укажите сумму вознаграждения для человека, который порекомендовал клиента')
+                                Forms\Components\TextInput::make('referrer_interest')
+                                    ->label('Пожалуйста, укажите % вознаграждения для человека, который порекомендовал клиента')
                                     ->integer()
                                     ->columnSpan(1),
                             ])

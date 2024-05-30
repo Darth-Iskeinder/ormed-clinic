@@ -6,10 +6,13 @@ use App\Filament\Resources\ReferralResource\Pages;
 use App\Filament\Resources\ReferralResource\RelationManagers;
 use App\Models\History;
 use App\Models\Referral;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -46,6 +49,11 @@ class ReferralResource extends Resource
                     ->label('Реферрал'),
                 Tables\Columns\TextColumn::make('referrer_reward')
                     ->label('Сумма выплаты рефералу'),
+                Tables\Columns\TextColumn::make('referrer_interest')
+                    ->label('% выплаты'),
+                IconColumn::make('reward_is_paid')
+                    ->label('Выплачено')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Дата создания рефералки'),
             ])
@@ -53,6 +61,13 @@ class ReferralResource extends Resource
                 //
             ])
             ->actions([
+                Action::make('Выплатить')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->action(function (History $history) {
+                        $history->reward_is_paid = true;
+                        $history->save();
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

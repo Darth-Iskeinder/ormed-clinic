@@ -15,7 +15,9 @@ class History extends Model
         'services',
         'reject_services',
         'referrer',
+        'referrer_interest',
         'referrer_reward',
+        'reward_is_paid',
         'diagnosis',
         'total_amount',
         'total_staff_revenue',
@@ -49,7 +51,10 @@ class History extends Model
                 $total_staff_revenue += round(($item['price'] * (int) $service['count'] * $payoutPercentage) / 100);
             }
 
+            $referrerInterest = isset($model->referrer_interest) ? (float) $model->referrer_interest : 0;
+
             $model->total_amount = $total_revenue;
+            $model->referrer_reward = $total_revenue * ($referrerInterest / 100);
             $model->total_staff_revenue = $total_staff_revenue;
             $model->total_company_revenue = $total_revenue - $total_staff_revenue;
             $model->staff_id = $model->staff_id ?? $user->id;
