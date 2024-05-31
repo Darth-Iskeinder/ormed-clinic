@@ -58,7 +58,7 @@ class EventResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         $user = auth()->user();
-        return parent::getEloquentQuery()->where('staff_id', $user->id);
+        return parent::getEloquentQuery()->where('user_id', $user->id);
     }
 
     public static function table(Table $table): Table
