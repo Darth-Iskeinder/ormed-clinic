@@ -23,6 +23,7 @@ use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -121,8 +122,43 @@ class HistoryResource extends Resource
                     ->description(fn($record) => Carbon::parse($record->created_at)->format('H:i:s')),
             ])
             ->filters([
-                //
+                Filter::make('created_at')
+                    ->form([
+                        Forms\Components\DatePicker::make('created_at')
+                            ->timezone('Asia/Bishkek'),
+                        Forms\Components\DatePicker::make('created_until')
+                            ->timezone('Asia/Bishkek')
+                            ->default(now())
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_at'],
+                                fn (Builder $query, $date) => $query->whereDate('created_at', '>=', $date)
+                            )
+                            ->when(
+                                $data['created_until'],
+                                fn (Builder $query, $date) => $query->whereDate('created_at', '<=', $date)
+                            );
+                    })
+                    ->indicateUsing(function (array $data): array {
+                        $indicators = [];
+                        if ($data['created_at'] ?? null) {
+                            $indicators['created_at'] = 'Created at ' . Carbon::parse($data['created_at'])->toFormattedDateString();
+                        }
+                        if ($data['created_until'] ?? null) {
+                            $indicators['created_until'] = 'Created until ' . Carbon::parse($data['created_until'])->toFormattedDateString();
+                        }
+
+                        return $indicators;
+                    })
+
             ])
+            ->filtersTriggerAction(
+                fn (Action $action) => $action
+                    ->button()
+                    ->label('Filter'),
+            )
             ->actions([
 
             ]);

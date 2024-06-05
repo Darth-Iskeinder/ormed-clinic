@@ -43,16 +43,20 @@ class UserResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label('Имя'),
+                    ->label('Имя')
+                    ->required(),
                 TextInput::make('specialization')
                     ->label('Специализация'),
                 TextInput::make('email')
-                    ->label('Email'),
+                    ->label('Email')
+                    ->required(),
                 TextInput::make('password')
-                    ->label('Пароль'),
+                    ->label('Пароль')
+                    ->required(),
                 Forms\Components\Select::make('role_id')
-                ->label('Выберите роль')
-                ->options(Role::all()->pluck('name', 'id'))
+                    ->label('Выберите роль')
+                    ->required()
+                    ->options(Role::all()->pluck('name', 'id'))
             ]);
     }
 
